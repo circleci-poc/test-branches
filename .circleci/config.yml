@@ -5,13 +5,18 @@ jobs:
       - image: alpine:latest
     steps:
       - checkout
-      - run: echo "hello world, from master branch!"
+      - run: echo "hello world, from some_other_branch!"
   build-master:
     docker:
       - image: alpine:latest
     steps:
       - checkout
       - run: echo "build-master echo"
+  fail:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: exit 1
 workflows:
   version: 2
   build-master:
@@ -20,7 +25,10 @@ workflows:
           filters:
             branches:
               only: master
+  another-workflow:
+    jobs:
       - build:
           filters:
             branches:
-              only: another_branch
+              only: some_other_branch
+      - fail
