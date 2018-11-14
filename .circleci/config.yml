@@ -12,6 +12,11 @@ jobs:
     steps:
       - checkout
       - run: echo "build-master echo"
+  fail:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: exit 1
 workflows:
   version: 2
   build-master:
@@ -20,7 +25,10 @@ workflows:
           filters:
             branches:
               only: master
+  another-workflow:
+    jobs:
       - build:
           filters:
             branches:
               only: some_other_branch
+      - fail
