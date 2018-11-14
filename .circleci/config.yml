@@ -2,12 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-    - image: alpine:latest
+      - image: alpine:latest
     steps:
-    - checkout
-    - run: echo "hello world, from master branch!"
+      - checkout
+      - run: echo "hello world, from master branch!"
+  build-master:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run: echo "build-master echo"
 workflows:
   version: 2
+  build-master:
+    jobs:
+      - build-master
   build-another-branch:
     jobs:
       - build:
