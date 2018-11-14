@@ -23,4 +23,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: another_branch
+              only: some_other_branch
