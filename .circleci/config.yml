@@ -5,7 +5,7 @@ jobs:
       - image: alpine:latest
     steps:
       - checkout
-      - run: echo "hello world, from master branch!"
+      - run: echo "hello world, from some_other_branch!"
   build-master:
     docker:
       - image: alpine:latest
