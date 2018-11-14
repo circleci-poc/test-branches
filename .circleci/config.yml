@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: alpine:latest
+    steps:
+    - checkout
+    - run: echo "hello world, from master"
+workflows:
+  version: 2
+  build-another-branch:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: another_branch
